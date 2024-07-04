@@ -1,7 +1,7 @@
 import { Receta } from "../models/receta.model";
 
 
-const table = 'Category';
+const table = 'Receta';
  //const admin = require('firebase-admin')
  const admin = require('firebase-admin');
  const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
