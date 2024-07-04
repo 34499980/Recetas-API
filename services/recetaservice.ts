@@ -1,26 +1,26 @@
 import { Receta } from "../models/receta.model";
 
 
-const table = 'Receta';
+const table = 'Recetas';
  //const admin = require('firebase-admin')
  const admin = require('firebase-admin');
  const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue, collection } = require('firebase-admin/firestore');
 
 
- var serviceAccount = require("../recetas-36674-firebase-adminsdk-e8pf4-3d7e47ac9a.json");
+ var serviceAccount = require("../recetas-36674-firebase-adminsdk-e8pf4-4e0a9350b6.json");
  admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://recetas-36674.firebaseio.com"
   });
   const firebaseConfig = {
-    firebase : false,
     apiKey: "AIzaSyCbkIpV_Nvw5U_7zr0OH97SWISJjKHfpUw",
     authDomain: "recetas-36674.firebaseapp.com",
     databaseURL: "https://recetas-36674.firebaseio.com",
     projectId: "recetas-36674",
     storageBucket: "recetas-36674.appspot.com",
-    messagingSenderId: "995657037391"
+    messagingSenderId: "995657037391",
+    appId: "1:995657037391:web:035825b8c8d4b4b3a01c3a"
   };
 
  //const db = admin.database();
