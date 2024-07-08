@@ -8,7 +8,9 @@ const allowedOrigins = [
     'http://localhost',
     'http://localhost:8080',
     'http://localhost:8100',
-    'http://localhost:4200'
+    'http://localhost:4200',
+    'https://io-recetas.vercel.app',
+    'https://io-recetas-git-main-34499980s-projects.vercel.app'
   ];
   const corsOptions = {
     origin: (origin, callback) => {
