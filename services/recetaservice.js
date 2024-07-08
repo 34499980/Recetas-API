@@ -15,7 +15,7 @@ const table = 'Recetas';
 const admin = require('firebase-admin');
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue, collection } = require('firebase-admin/firestore');
-var serviceAccount = require("../recetas-36674-firebase-adminsdk-e8pf4-4e0a9350b6.json");
+var serviceAccount = require("../recetas-36674-firebase-adminsdk-e8pf4-dacddc6d0d.json");
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://recetas-36674.firebaseio.com"
@@ -37,10 +37,9 @@ function add(req) {
         return db.collection(table)
             .add({
             key: '',
-            name: req.name,
-            image: req.image,
-            createdDate: req.createdDate,
-            modifiedDate: ''
+            nombre: req.nombre,
+            descripcion: req.descripcion,
+            ingredientes: req.ingredientes,
         }).then(response => {
             return response.id;
         });
@@ -50,13 +49,13 @@ exports.add = add;
 function edit(req) {
     return __awaiter(this, void 0, void 0, function* () {
         var ref = db.collection(table);
+        console.log(req.key);
         var upref = ref.doc(req.key);
         upref.update({
             key: req.key,
-            name: req.name,
-            image: req.image,
-            modifiedDate: req.modifiedDate,
-            createdDate: req.createdDate
+            nombre: req.nombre,
+            descripcion: req.descripcion,
+            ingredientes: req.ingredientes,
         });
     });
 }
@@ -90,7 +89,7 @@ exports.getById = getById;
 function getByName(req) {
     return __awaiter(this, void 0, void 0, function* () {
         let entity;
-        return yield db.collection(table).where("name", "==", req.body.name).get().then(snap => {
+        return yield db.collection(table).where("nombre", "==", req.body.nombre).get().then(snap => {
             snap.forEach(doc => {
                 entity = doc.data();
             });

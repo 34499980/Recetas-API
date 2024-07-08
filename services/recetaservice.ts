@@ -8,7 +8,7 @@ const table = 'Recetas';
 const { getFirestore, Timestamp, FieldValue, collection } = require('firebase-admin/firestore');
 
 
- var serviceAccount = require("../recetas-36674-firebase-adminsdk-e8pf4-4e0a9350b6.json");
+ var serviceAccount = require("../recetas-36674-firebase-adminsdk-e8pf4-dacddc6d0d.json");
  admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://recetas-36674.firebaseio.com"
@@ -34,10 +34,9 @@ export async function add(req): Promise<string>{
   
   .add({
     key: '',
-    name: req.name,
-    image: req.image,
-    createdDate: req.createdDate,
-    modifiedDate: ''
+    nombre: req.nombre,
+    descripcion: req.descripcion,
+    ingredientes: req.ingredientes,
 }).then(response => {
   
     return response.id;
@@ -53,14 +52,13 @@ export async function add(req): Promise<string>{
 export async function edit(req): Promise<void>{
  
     var ref = db.collection(table);
-   
+    console.log(req.key)
     var upref = ref.doc(req.key);
             upref.update( {
-                                    key: req.key,
-                                    name: req.name,
-                                    image: req.image,                                  
-                                    modifiedDate: req.modifiedDate,
-                                    createdDate: req.createdDate
+                key: req.key,
+                nombre: req.nombre,
+                descripcion: req.descripcion,
+                ingredientes: req.ingredientes,
                          })
      
     }
@@ -87,7 +85,7 @@ export async function getById(key): Promise<Receta>{
   
 export async function getByName(req): Promise<Receta>{
     let entity: Receta;
-    return await db.collection(table).where("name", "==", req.body.name).get().then(snap => {
+    return await db.collection(table).where("nombre", "==", req.body.nombre).get().then(snap => {
         snap.forEach(doc => {          
             entity = doc.data()
         });
